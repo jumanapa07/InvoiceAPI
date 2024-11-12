@@ -8,7 +8,7 @@ class Invoice(models.Model):
     customer_name=models.CharField(max_length=100)
 
     def __str__(self):
-        return self.invoiceNum
+        return self.invoice_number
 
 class InvoiceDetail(models.Model):
     invoice=models.ForeignKey(Invoice,related_name='details',on_delete=models.CASCADE)
@@ -21,4 +21,4 @@ class InvoiceDetail(models.Model):
         self.line_total=self.quantity* self.price
         super().save(*args,**kwargs)
     def __str__(self):
-        return f"{self.description} ({self.invoice.invoiceNum})"
+        return f"{self.description} ({self.invoice.invoice_number})"
