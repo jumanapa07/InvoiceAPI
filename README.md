@@ -13,7 +13,7 @@ A simple API using Django REST Framework. The API will manage invoices and their
 1. Clone the repository:
     ```bash
     git clone https://github.com/jumanapa07/InvoiceAPI
-    cd InvoiceAPI
+    cd InvoiceAPI/Invoice_API
     ```
 
 2. Create and activate a virtual environment:
@@ -63,4 +63,21 @@ A simple API using Django REST Framework. The API will manage invoices and their
         }
     ]
 }
-  
+```
+#### Assumptions
+
+1. Writable and Read-only Serializer Fields:
+
+Errors regarding writable fields in the serializer (TypeError when using Invoice.objects.create()) were addressed by ensuring that certain fields, like line_total, are read-only and computed on the server side.
+
+2. related_name in Foriegn key
+
+The related_name='details' allows you to access all InvoiceDetail objects related to an Invoice instance using the details attribute. Without it, Django would not automatically create a details field for the reverse relationship.
+
+3. PUT Request Logic for Nested Updates:
+
+To manage updates effectively, it was assumed that PUT requests would replace all existing InvoiceDetail records for an Invoice. This approach simplifies update operations by deleting previous InvoiceDetail entries and replacing them with new entries from the request payload.
+
+
+
+
