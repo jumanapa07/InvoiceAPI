@@ -15,6 +15,10 @@ class InvoiceDetail(models.Model):
     description=models.CharField(max_length=200)
     quantity=models.IntegerField()
     price=models.DecimalField(max_digits=10,decimal_places=2)
+    line_total = models.DecimalField(max_digits=10, decimal_places=2, editable=False)
 
+    def save(self,*args,**kwargs):
+        self.line_total=self.quantity* self.price
+        super().save(*args,**kwargs)
     def __str__(self):
         return f"{self.description} ({self.invoice.invoiceNum})"
