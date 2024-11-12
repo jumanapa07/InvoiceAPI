@@ -1,0 +1,7 @@
+#  Django and REST framework 
+Django==4.2.3
+djangorestframework==3.14.0
+
+# For deployment
+gunicorn==20.1.0        
+whitenoise==6.4.0       
