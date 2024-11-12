@@ -3,15 +3,15 @@ from django.db import models
 # Create your models here.
 
 class Invoice(models.Model):
-    invoiceNum = models.CharField(max_length=30,unique=True)
+    invoice_number = models.CharField(max_length=30,unique=True)
     date=models.DateField()
-    customerName=models.CharField(max_length=100)
+    customer_name=models.CharField(max_length=100)
 
     def __str__(self):
         return self.invoiceNum
 
 class InvoiceDetail(models.Model):
-    invoice=models.ForeignKey(Invoice,on_delete=models.CASCADE)
+    invoice=models.ForeignKey(Invoice,related_name='details',on_delete=models.CASCADE)
     description=models.CharField(max_length=200)
     quantity=models.IntegerField()
     price=models.DecimalField(max_digits=10,decimal_places=2)
